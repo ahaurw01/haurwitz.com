@@ -4,7 +4,6 @@ App = Ember.Application.create({
 
 App.Store = DS.Store.extend({
   adapter: DS.RESTAdapter.extend({
-    url: 'http://localhost:3000',
     namespace: 'rest'
   })
 });

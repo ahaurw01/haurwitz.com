@@ -44,6 +44,6 @@ app.get('/rest/posts/:postId', function (req, res) {
   });
 });
 
-var port = process.env.SERVER_PORT || 3000
+var port = process.env.SERVER_PORT || 80
 app.listen(port);
 console.log('Server started on port ' + port);
