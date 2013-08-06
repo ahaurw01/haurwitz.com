@@ -6,7 +6,7 @@ var express = require('express'),
 // Static files
 app.use(express.static(path.normalize(__dirname + '/../app/')));
 
-var post = {
+var post1 = {
   id: 1,
   title: 'First!',
   date: new Date(),
@@ -14,12 +14,20 @@ var post = {
   body: 'Full Content'
 };
 
+var post2 = {
+  id: 2,
+  title: 'Second...',
+  date: new Date(),
+  intro: 'Intro',
+  body: 'Full Content'
+};
+
 app.get('/rest/posts', function (req, res) {
-  res.send({posts: [post]});
+  res.send({posts: [post1, post2]});
 });
 
 app.get('/rest/posts/:postId', function (req, res) {
-  res.send({post: post});
+  res.send({post: req.params.postId === 1 ? post1 : post2});
 });
 
 var port = process.env.SERVER_PORT || 3000
