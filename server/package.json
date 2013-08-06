@@ -1,0 +1,15 @@
+{
+  "name": "haurwitz.com",
+  "version": "0.0.1",
+  "description": "A Website",
+  "author": "Aaron Haurwitz <aaron.haurwitz@gmail.com>",
+  "dependencies": {
+    "express": "3.x"
+  },
+  "devDependencies": {
+  },
+  "scripts": {
+    "start": "node app"
+  },
+  "engine": "node >= 0.8.0"
+}

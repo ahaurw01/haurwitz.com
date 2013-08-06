@@ -1,0 +1,37 @@
+<html>
+<head>
+  <title>haurwitz.com</title>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+  <script type="text/x-handlebars" data-template-name="application">
+    <h1>haurwitz.com</h1>
+    {{outlet}}
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="posts">
+    {{#each model}}
+      {{#linkTo 'post' this}} <h1 class="post-title">{{title}}</h1> {{/linkTo}}
+      <span class="post-date">{{date date}}</span>
+      <div class="post-intro">{{markdown intro}}</div>
+    {{/each}}
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="post">
+    <h1 class="post-title">{{title}}</h1>
+    <span class="post-date">{{date date}}</span>
+    <div class="post-full">{{markdown body}}</div>
+  </script>
+
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script src="js/libs/handlebars.js"></script>
+  <script src="js/libs/ember.js"></script>
+  <script src="js/libs/ember-data.js"></script>
+  <script src="js/libs/moment.min.js"></script>
+  <script src="js/libs/showdown.min.js"></script>
+  <script type="text/javascript" src="js/app.js"></script>
+</body>
+</html>
