@@ -7,20 +7,28 @@
 <body>
 
   <script type="text/x-handlebars" data-template-name="application">
-    <h1>haurwitz.com</h1>
-    {{outlet}}
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3">
+          <h1 class="go-home">{{#linkTo 'posts'}}aaron haurwitz{{/linkTo}}</h1>
+        </div>
+        <div class="col-lg-6">
+          {{outlet}}
+        </div>
+      </div>
+    </div>
   </script>
 
   <script type="text/x-handlebars" data-template-name="posts">
     {{#each model}}
-      {{#linkTo 'post' this}} <h1 class="post-title">{{title}}</h1> {{/linkTo}}
+      {{#linkTo 'post' this}} <h2 class="post-title">{{title}}</h2> {{/linkTo}}
       <span class="post-date">{{date date}}</span>
       <div class="post-intro">{{markdown intro}}</div>
     {{/each}}
   </script>
 
   <script type="text/x-handlebars" data-template-name="post">
-    <h1 class="post-title">{{title}}</h1>
+    {{#linkTo 'post' this}} <h2 class="post-title">{{title}}</h2> {{/linkTo}}
     <span class="post-date">{{date date}}</span>
     <div class="post-full">{{markdown body}}</div>
   </script>

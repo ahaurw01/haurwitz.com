@@ -39,7 +39,7 @@ app.get('/rest/posts', function (req, res) {
 app.get('/rest/posts/:postId', function (req, res) {
   res.send({
     post: _.find(posts, function (post) {
-      return post.id === req.params.postId;
+      return post.id === +req.params.postId;
     })
   });
 });

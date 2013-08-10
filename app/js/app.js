@@ -41,5 +41,5 @@ Ember.Handlebars.registerBoundHelper('markdown', function (input) {
 });
 
 Ember.Handlebars.registerBoundHelper('date', function (date) {
-  return moment(date).fromNow();
+  return moment(date).format('MMMM Do, YYYY');
 });
