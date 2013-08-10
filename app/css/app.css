@@ -1,4 +1,18 @@
+body {
+  background-image: url('../img/wild_oliva.png');
+  color: #DDD;
+}
+
+a {
+  color: #AE00D1;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #D1008C;
+}
+
 .go-home a {
   text-decoration: none;
-  color: #666;
+  color: #23D100;
 }
