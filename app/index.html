@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>haurwitz.com</title>
+  <title>aaron haurwitz</title>
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/app.css">
 </head>
@@ -24,6 +24,7 @@
       {{#linkTo 'post' this}} <h2 class="post-title">{{title}}</h2> {{/linkTo}}
       <span class="post-date">{{date date}}</span>
       <div class="post-intro">{{markdown intro}}</div>
+      <div class="pull-right">{{#linkTo 'post' this}}more...{{/linkTo}}</div>
     {{/each}}
   </script>
 
