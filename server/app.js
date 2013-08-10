@@ -2,14 +2,14 @@ var express = require('express'),
     app = express(),
     _ = require('lodash'),
     path = require('path'),
-    fs = require('fs');
+    fs = require('fs'),
+    urlHelpers = require('./lib/url_helpers'),
+    posts = [];
 
 // Static files
 app.use(express.static(path.normalize(__dirname + '/../app/')));
 
-
 // Look through the blog_posts directory and put the posts into memory
-var posts = [], _postId = 1;
 fs.readdir(path.normalize(__dirname + '/../blog_posts/'), function (err, files) {
   if (err) {
     console.error(err);
@@ -21,10 +21,28 @@ fs.readdir(path.normalize(__dirname + '/../blog_posts/'), function (err, files) 
         // Look for {{{...}}}
         var jsonStart = text.indexOf('{{{') + 2,
             jsonEnd = text.indexOf('}}}'),
+            textStart = jsonEnd + 3,
             json = text.substring(jsonStart, jsonEnd + 1),
             post = JSON.parse(json);
-        post.body = post.intro = text.substring(jsonEnd + 3);
-        post.id = _postId++;
+
+        // Ensure there is a title
+        if (!post.title) {
+          console.error('You must have a title for each blog post.');
+          return;
+        }
+
+        post.body = text.substring(textStart);
+
+        // Look for <!--more-->
+        var more = '<!--more-->',
+            moreStart = text.indexOf(more);
+        if (moreStart === -1) {
+          moreStart = text.length;
+        }
+        post.intro = text.substring(textStart, moreStart);
+
+        // Make a url-friendly title for this post
+        post.urlTitle = post.id = urlHelpers.makeSafeUrlString(post.title);
 
         posts.push(post);
       });
@@ -36,10 +54,12 @@ app.get('/rest/posts', function (req, res) {
   res.send({posts: posts});
 });
 
-app.get('/rest/posts/:postId', function (req, res) {
+// :postTitle will be the urlTitle, i.e. lowercase, dashed representation of the actual title
+// e.g. /rest/posts/this-is-my-first-post
+app.get('/rest/posts/:postTitle', function (req, res) {
   res.send({
     post: _.find(posts, function (post) {
-      return post.id === +req.params.postId;
+      return post.urlTitle === req.params.postTitle;
     })
   });
 });

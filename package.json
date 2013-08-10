@@ -10,7 +10,7 @@
   "devDependencies": {
   },
   "scripts": {
-    "start": "SERVER_PORT=3000 node server/app"
+    "start": "node server/app"
   },
   "engine": "node >= 0.8.0"
 }
