@@ -16,10 +16,10 @@ function findPostByTitle(title) {
 // Appease the crawler
 app.use('/', function (req, res, next) {
   var route = req.query['_escaped_fragment_'];
-  if (route) {
+  if (route !== undefined) {
     var title = _.last(route.split('/')),
         html;
-    if (title === 'posts') {
+    if (title === 'posts' || title === '') {
       html = crawlerRenderer.renderAllPosts(posts);
     } else {
       html = crawlerRenderer.renderSinglePost(findPostByTitle(title));
