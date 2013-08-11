@@ -4,7 +4,31 @@ var express = require('express'),
     path = require('path'),
     fs = require('fs'),
     urlHelpers = require('./lib/url_helpers'),
+    crawlerRenderer = require('./lib/crawler_renderer'),
     posts = [];
+
+function findPostByTitle(title) {
+  return _.find(posts, function (post) {
+    return post.urlTitle === title;
+  });
+}
+
+// Appease the crawler
+app.use('/', function (req, res, next) {
+  var route = req.query['_escaped_fragment_'];
+  if (route) {
+    var title = _.last(route.split('/')),
+        html;
+    if (title === 'posts') {
+      html = crawlerRenderer.renderAllPosts(posts);
+    } else {
+      html = crawlerRenderer.renderSinglePost(findPostByTitle(title));
+    }
+    res.send(html);
+  } else {
+    next();
+  }
+});
 
 // Static files
 app.use(express.static(path.normalize(__dirname + '/../app/')));
@@ -58,12 +82,12 @@ app.get('/rest/posts', function (req, res) {
 // e.g. /rest/posts/this-is-my-first-post
 app.get('/rest/posts/:postTitle', function (req, res) {
   res.send({
-    post: _.find(posts, function (post) {
-      return post.urlTitle === req.params.postTitle;
-    })
+    post: findPostByTitle(req.params.postTitle)
   });
 });
 
 var port = process.env.PORT || 3000
 app.listen(port);
 console.log('Server started on port ' + port);
+
+exports.posts = posts;
