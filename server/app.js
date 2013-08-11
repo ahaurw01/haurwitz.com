@@ -13,6 +13,15 @@ function findPostByTitle(title) {
   });
 }
 
+// Please don't go through heroku!
+app.use(function (req, res, next) {
+  if (req.host.indexOf('heroku') > -1) {
+    res.redirect(301, 'http://aaron.haurwitz.com' + req.url);
+  } else {
+    next();
+  }
+});
+
 // Appease the crawler
 app.use('/', function (req, res, next) {
   var route = req.query['_escaped_fragment_'];
