@@ -85,11 +85,13 @@ App.DisqusView = Ember.View.extend({
   didInsertElement: function () {
     var existingScript = document.getElementById('disqus_script');
     if (existingScript) { // Simply reload disqus
-      var title = this.get('post.id');          
+      var id = this.get('post.id'),
+          title = this.get('post.title');        
       DISQUS.reset({
         reload: true,
         config: function () {  
-          this.page.identifier = title;
+          this.page.identifier = id;
+          this.page.title = title;
           this.page.url = window.location.toString();
         }
       });
@@ -97,11 +99,13 @@ App.DisqusView = Ember.View.extend({
       window.disqus_shortname = 'haurwitz';
       window.disqus_identifier = this.get('post.id');
       window.disqus_url = window.location.toString();
+      window.disqus_title = this.get('post.title');
       (function() {
         var dsq = document.createElement('script');
         dsq.type = 'text/javascript';
         dsq.async = true;
         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        dsq.id = 'disqus_script';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
       })();
     }
