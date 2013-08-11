@@ -1,7 +1,7 @@
 var _ = require('lodash'),
     Showdown = require('showdown'),
     converter = new Showdown.converter(),
-    startHtml = '<html><body>',
+    startHtml = '<html><body><h1>aaron haurwitz</h1>',
     endHtml = '</body></html>';
 
 function renderAllPosts(posts) {
