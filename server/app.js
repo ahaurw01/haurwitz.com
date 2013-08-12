@@ -1,6 +1,7 @@
 var express = require('express'),
     app = express(),
     _ = require('lodash'),
+    rsvp = require('rsvp'),
     path = require('path'),
     fs = require('fs'),
     urlHelpers = require('./lib/url_helpers'),
@@ -47,37 +48,56 @@ fs.readdir(path.normalize(__dirname + '/../blog_posts/'), function (err, files) 
   if (err) {
     console.error(err);
   } else {
-    files.forEach(function (file) {
-      file = path.normalize(__dirname + '/../blog_posts/' + file);
-      fs.readFile(file, {encoding: 'utf8'}, function (err, text) {
-        text = text.toString();
-        // Look for {{{...}}}
-        var jsonStart = text.indexOf('{{{') + 2,
-            jsonEnd = text.indexOf('}}}'),
-            textStart = jsonEnd + 3,
-            json = text.substring(jsonStart, jsonEnd + 1),
-            post = JSON.parse(json);
+    // Read in all the files, hipster style
+    var promises = files.map(function (file) {
+      var promise = new rsvp.Promise(function (resolve, reject) {
+        file = path.normalize(__dirname + '/../blog_posts/' + file);
+        fs.readFile(file, {encoding: 'utf8'}, function (err, text) {
+          if (err) {
+            reject(err);
+            return;
+          }
+          text = text.toString();
+          // Look for {{{...}}}
+          var jsonStart = text.indexOf('{{{') + 2,
+              jsonEnd = text.indexOf('}}}'),
+              textStart = jsonEnd + 3,
+              json = text.substring(jsonStart, jsonEnd + 1),
+              post = JSON.parse(json);
 
-        // Ensure there is a title
-        if (!post.title) {
-          console.error('You must have a title for each blog post.');
-          return;
-        }
+          // Ensure there is a title
+          if (!post.title) {
+            console.error('You must have a title for each blog post.');
+            return;
+          }
 
-        post.body = text.substring(textStart);
+          post.body = text.substring(textStart);
 
-        // Look for <!--more-->
-        var more = '<!--more-->',
-            moreStart = text.indexOf(more);
-        if (moreStart === -1) {
-          moreStart = text.length;
-        }
-        post.intro = text.substring(textStart, moreStart);
+          // Look for <!--more-->
+          var more = '<!--more-->',
+              moreStart = text.indexOf(more);
+          if (moreStart === -1) {
+            moreStart = text.length;
+          }
+          post.intro = text.substring(textStart, moreStart);
 
-        // Make a url-friendly title for this post
-        post.urlTitle = post.id = urlHelpers.makeSafeUrlString(post.title);
+          // Make a url-friendly title for this post
+          post.urlTitle = post.id = urlHelpers.makeSafeUrlString(post.title);
 
-        posts.push(post);
+          posts.push(post);
+          resolve();
+        });
+      });
+      return promise;
+    });
+
+    // Once they're all read, sort them
+    rsvp.all(promises).then(function () {
+      // Sort by date descending
+      posts.sort(function (p1, p2) {
+        var date1 = new Date(p1.date),
+            date2 = new Date(p2.date);
+        return date2.getTime() - date1.getTime();
       });
     });
   }
