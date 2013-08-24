@@ -5,8 +5,7 @@ An express-powered site that renders markdown blog posts inside of an ember.js f
 ### I'll be your guide to the repo.
 
 - app. All the front-end code
-  - js. The interesting stuff. 
-    - app.js. Contains the entirety of the ember code. 
+  - js/app.js. Contains the entirety of the ember code. 
   - index.html. The base html and all handlebars templates for the site.
 - blog_posts. The blog posts written in markdown syntax
 - server. All the server-side code
