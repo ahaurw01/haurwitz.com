@@ -1,6 +1,4 @@
-App = Ember.Application.create({
-  LOG_TRANSITIONS: true
-});
+App = Ember.Application.create();
 
 App.Store = DS.Store.extend({
   adapter: DS.RESTAdapter.extend({
@@ -58,6 +56,11 @@ App.PostsRoute = Ember.Route.extend({
   model: function () {
     return App.Post.find();
   }
+});
+
+App.PostsController = Ember.ArrayController.extend({
+  sortProperties: ['date'],
+  sortAscending: false
 });
 
 var attr = DS.attr;
