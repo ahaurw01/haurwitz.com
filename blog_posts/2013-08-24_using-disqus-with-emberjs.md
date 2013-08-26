@@ -76,7 +76,7 @@ App.DisqusView = Ember.View.extend({
         }
       });
     } else {
-      window.disqus_shortname = 'haurwitz';
+      window.disqus_shortname = 'my-shortname';
       window.disqus_identifier = this.get('post.id');
       window.disqus_url = window.location.toString();
       window.disqus_title = this.get('post.title');
