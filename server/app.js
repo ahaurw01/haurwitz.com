@@ -41,7 +41,7 @@ app.use('/', function (req, res, next) {
 });
 
 // Static files
-app.use(express.static(path.normalize(__dirname + '/../app/')));
+app.use(express.static(path.normalize(__dirname + '/../public/')));
 
 // Look through the blog_posts directory and put the posts into memory
 fs.readdir(path.normalize(__dirname + '/../blog_posts/'), function (err, files) {
