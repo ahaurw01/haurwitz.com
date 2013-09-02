@@ -1,1 +1,1 @@
-web: node server/app.js
+web: ./node_modules/.bin/brunch build && node server/app
