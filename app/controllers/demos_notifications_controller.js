@@ -1,8 +1,5 @@
 'use strict';
 
-// A counter for globally unique identifiers
-var _guid = 0;
-
 module.exports = Ember.Controller.extend({
   /**
    * The view that houses a single notification
@@ -73,7 +70,6 @@ module.exports = Ember.Controller.extend({
         type: type,
         title: title,
         message: message,
-        guid: ++_guid,
         closed: false
       });
       this.notifications.pushObject(notification);

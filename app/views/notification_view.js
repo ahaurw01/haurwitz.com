@@ -87,7 +87,6 @@ module.exports = Ember.View.extend({
     var topPx = row * unitHeight,
         rightPx = column * unitWidth;
 
-
     return 'top: ' + topPx + 'px; right: ' + rightPx + 'px;';
   }.property('controller.notifications.@each.closed'),
 
