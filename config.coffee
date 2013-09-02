@@ -45,7 +45,6 @@ exports.config =
         noarg: true
         noempty: true
         nonew: true
-        plusplus: true
         quotmark: true
         regexp: true
         undef: true

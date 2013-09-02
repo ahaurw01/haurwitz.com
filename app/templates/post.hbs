@@ -1,4 +1,6 @@
-{{#linkTo 'post' this}} <h2 class="post-title">{{title}}</h2> {{/linkTo}}
-<span class="post-date">{{date date}}</span>
-<div class="post-full">{{markdown body}}</div>
-{{view App.DisqusView postBinding="controller.content"}}
+{{#view App.BlogWrapperView}}
+  {{#linkTo 'post' this}} <h2 class="post-title">{{title}}</h2> {{/linkTo}}
+  <span class="post-date">{{date date}}</span>
+  <div class="post-full">{{markdown body}}</div>
+  {{view App.DisqusView postBinding="controller.content"}}
+{{/view}}

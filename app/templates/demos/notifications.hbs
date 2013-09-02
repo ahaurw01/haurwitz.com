@@ -1,0 +1,9 @@
+<div class="notification-container">
+  {{#each notification in notifications}}
+    {{view NotificationView notificationBinding="notification"}}
+  {{/each}}
+</div>
+
+<button type="button" id="create-notification-button" class="btn btn-primary" {{action "createNotification"}}>
+  Notify me!
+</button>

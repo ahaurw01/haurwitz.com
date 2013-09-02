@@ -1,6 +1,8 @@
-{{#each arrangedContent}}
-  {{#linkTo 'post' this}} <h2 class="post-title">{{title}}</h2> {{/linkTo}}
-  <span class="post-date">{{date date}}</span>
-  <div class="post-intro">{{markdown intro}}</div>
-  <div class="pull-right">{{#linkTo 'post' this}}more...{{/linkTo}}</div>
-{{/each}}
+{{#view App.BlogWrapperView}}
+  {{#each arrangedContent}}
+    {{#linkTo 'post' this}} <h2 class="post-title">{{title}}</h2> {{/linkTo}}
+    <span class="post-date">{{date date}}</span>
+    <div class="post-intro">{{markdown intro}}</div>
+    <div class="pull-right">{{#linkTo 'post' this}}more...{{/linkTo}}</div>
+  {{/each}}
+{{/view}}
