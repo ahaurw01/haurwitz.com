@@ -5,7 +5,7 @@ module.exports = Ember.View.extend({
   
   classNameBindings: [
     ':notification',
-    'notification.closed',
+    'content.closed',
     'isOpaque'
   ],
   
@@ -71,7 +71,7 @@ module.exports = Ember.View.extend({
   style: function () {
     // Get all open notifications
     var notifications = this.get('controller.notifications').rejectBy('closed'),
-        index = notifications.indexOf(this.get('notification')),
+        index = notifications.indexOf(this.get('content')),
         viewportHeight = $(window).height(),
         unitHeight = 80,
         unitWidth = 320,
@@ -94,7 +94,7 @@ module.exports = Ember.View.extend({
    * @property {String} fontawesome class for the icon
    */
   iconType: function () {
-    var type = this.get('notification.type'),
+    var type = this.get('content.type'),
         hash = {
           'alert': 'icon-exclamation-sign',
           'success': 'icon-ok',
@@ -102,7 +102,7 @@ module.exports = Ember.View.extend({
           'loud': 'icon-bullhorn'
         };
     return hash[type] || '';
-  }.property('notification.type'),
+  }.property('content.type'),
 
   actions: {
     /**
@@ -111,7 +111,7 @@ module.exports = Ember.View.extend({
     close: function () {
       this.set('isOpaque', false);
       setTimeout(function () {
-        this.set('notification.closed', true);
+        this.set('content.closed', true);
         clearTimeout(this.get('timeoutId'));
       }.bind(this), 300);
     }

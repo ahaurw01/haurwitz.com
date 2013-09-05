@@ -4,7 +4,7 @@ module.exports = Ember.Controller.extend({
   /**
    * The view that houses a single notification
    */
-  NotificationView: require('views/notification_view'),
+  NotificationContainerView: require('views/demos/notification_container_view'),
 
   /**
    * @property {Array} The array of app-wide notifications
