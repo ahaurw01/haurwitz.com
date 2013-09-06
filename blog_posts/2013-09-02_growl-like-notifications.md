@@ -98,16 +98,36 @@ You may have noticed there is a `closed` property on the notification object. Th
 
 ### The views
 
-The container for your notifications will need to be a fixed-position, high-z-index view that sits empty until populated with notifications. I put this container inside of the application template for demo purposes.
+The container for your notifications will need to be a fixed-position, high-z-index view that sits empty until populated with notifications. I put this container inside of the application template for demo purposes. It is an extension of the `Ember.CollectionView` class. The `CollectionView` will spit out a child view for every item in its `content` property. *Hat tip to Asaf for suggesting this instead of the `{{#each}}` helper.*
 
 ```
 <script type="text/x-handlebars" data-template-name="application">
-  <div class="notification-container">
-    {{#each notification in notifications}}
-      {{view App.NotificationView notificationBinding="notification"}}
-    {{/each}}
-  </div>
+  {{view App.NotificationContainerView}}
+
+  {{! Other fun things... }}
 </script>
+```
+
+```
+App.NotificationContainerView = Ember.CollectionView.extend({
+  /**
+   * @property {String[]} The array of concrete class names to put on this view's element
+   */
+  classNames: ['notification-container'],
+  
+  /**
+   * @property {View} Our notification view class.
+   * This determines what view class to render for each item in the content array
+   */
+  itemViewClass: App.NotificationView,
+  
+  /**
+   * Binding to our controller's notifications array.
+   * There will be an App.NotificationView rendered for each
+   * guy in here.
+   */
+  contentBinding: Ember.Binding.oneWay('controller.notifications')
+});
 ```
 
 The `NotificationView` starts to get more interesting.
@@ -119,15 +139,17 @@ The `NotificationView` starts to get more interesting.
     <i class="icon-remove"></i>
   </a>
   <strong>
-    {{view.notification.title}}
+    {{view.content.title}}
   </strong>
   <p>
-    {{view.notification.message}}
+    {{view.content.message}}
   </p>
 </script>
 ```
 
-I am using the notification object's properties here by inserting the title and the message directly. The type is used by a computed property on the view called `iconType`. This is simply for mapping a meaningful type name to a FontAwesome CSS class. There is also a link with an action on it that will need to close the notification.
+I am using the notification object's properties here by inserting the title and the message directly. (Note that the `content` property of the view is one of the notification objects from the parent view's `content` array.)
+
+The type is used by a computed property on the view called `iconType`. This is simply for mapping a meaningful type name to a FontAwesome CSS class. There is also a link with an action on it that will need to close the notification.
 
 Here are all the properties of the `NotificationView`. We'll regroup after all the code.
 
@@ -137,7 +159,7 @@ App.NotificationView = Ember.View.extend({
   
   classNameBindings: [
     ':notification',
-    'notification.closed',
+    'content.closed',
     'isOpaque'
   ],
   
@@ -203,7 +225,7 @@ App.NotificationView = Ember.View.extend({
   style: function () {
     // Get all open notifications
     var notifications = this.get('controller.notifications').rejectBy('closed'),
-        index = notifications.indexOf(this.get('notification')),
+        index = notifications.indexOf(this.get('content')), // content is the notification object
         viewportHeight = $(window).height(),
         unitHeight = 80,
         unitWidth = 320,
@@ -226,7 +248,7 @@ App.NotificationView = Ember.View.extend({
    * @property {String} fontawesome class for the icon
    */
   iconType: function () {
-    var type = this.get('notification.type'),
+    var type = this.get('content.type'),
         hash = {
           'alert': 'icon-exclamation-sign',
           'success': 'icon-ok',
@@ -234,7 +256,7 @@ App.NotificationView = Ember.View.extend({
           'loud': 'icon-bullhorn'
         };
     return hash[type] || '';
-  }.property('notification.type'),
+  }.property('content.type'),
 
   actions: {
     /**
@@ -243,7 +265,7 @@ App.NotificationView = Ember.View.extend({
     close: function () {
       this.set('isOpaque', false);
       setTimeout(function () {
-        this.set('notification.closed', true);
+        this.set('content.closed', true);
         clearTimeout(this.get('timeoutId'));
       }.bind(this), 300);
     }
@@ -269,11 +291,11 @@ When the view catches the `close` event, it sets `isOpaque` to false, letting th
 
 #### `notification.closed` property
 
-Whenever a notification is closed, we want all other notifications that were present to stay on the screen, but animate to their new location. To achieve this, we must make sure that the collection of notifications being `{{#each}}`ed over does not change in a significant way. If this collection is rebuilt, every notification view that was in the DOM is ripped out and new ones are put in. We don't want that because the new ones would not know where they were previously and animation would be near impossible.
+Whenever a notification is closed, we want all other notifications that were present to stay on the screen, but animate to their new location. To achieve this, we must make sure that the collection of notifications being wrapped by our `NotificationContainerView` does not change in a significant way. If this collection is rebuilt, every notification view that was in the DOM is ripped out and new ones are put in. We don't want that because the new ones would not know where they were previously and animation would be near impossible.
 
 Instead what we do is set a `closed` property on any notification that has been closed and just don't display it on the screen anymore. We can simply update the position settings of the views that need to stay visible and they will animate nicely to their new homes. 
 
-In the `close` event handler, we wait 300 milliseconds to set the `closed` property to true since we have a classname binding on the `notification.closed` property that sets `display: none`.
+In the `close` event handler, we wait 300 milliseconds to set the `closed` property to true since we have a classname binding on the `content.closed` property that sets `display: none`.
 
 #### Horizontal and vertical placement
 
