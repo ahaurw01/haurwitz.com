@@ -43,6 +43,10 @@ app.use('/', function (req, res, next) {
 // Static files
 app.use(express.static(path.normalize(__dirname + '/../public/')));
 
+// body parser for demo purposes
+app.use(express.bodyParser());
+app.use(express.methodOverride());
+
 // Look through the blog_posts directory and put the posts into memory
 fs.readdir(path.normalize(__dirname + '/../blog_posts/'), function (err, files) {
   if (err) {
@@ -114,6 +118,14 @@ app.get('/rest/posts/:postTitle', function (req, res) {
     post: findPostByTitle(req.params.postTitle)
   });
 });
+
+// Demo API fun stuff
+var demoApiHandlers = require('./lib/demo_api');
+app.get('/demo/customers/:handle', demoApiHandlers.getCustomer);
+app.get('/demo/products', demoApiHandlers.getProducts);
+app.get('/demo/products/:productId', demoApiHandlers.getProduct);
+app.get('/demo/wishlists/:wishlistId', demoApiHandlers.getWishlist);
+app.put('/demo/wishlists/:wishlistId', demoApiHandlers.putWishlist);
 
 var port = process.env.PORT || 3000
 app.listen(port);
