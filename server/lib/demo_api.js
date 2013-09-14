@@ -6,24 +6,24 @@ var customers = [
         handle: 'bigapple',
         firstName: 'Bob',
         lastName: 'Apple',
-        wishlistId: 10
+        wishlist: 10
       },
       {
         id: 2,
         handle: 'heygurl',
         firstName: 'Susan',
         lastName: 'Lazy',
-        wishlistId: 11
+        wishlist: 11
       }
     ],
     wishlists = [
       {
         id: 10,
-        productIds: []
+        products: []
       },
       {
         id: 11,
-        productIds: []
+        products: []
       }
     ],
     products = [ // categories: toys, electronics, books, apparel, beer
@@ -204,16 +204,15 @@ module.exports.getProducts = function (req, res) {
 };
 
 module.exports.getProduct = function (req, res) {
-  res.send({product: _.find(products, {id: +req.params.productId})});
+  res.send({product: _.find(products, {id: +req.params.id})});
 };
 
 module.exports.getWishlist = function (req, res) {
-  res.send({wishlist: _.find(wishlists, {id: +req.params.wishlistId})});
+  res.send({wishlist: _.find(wishlists, {id: +req.params.id})});
 };
 
 module.exports.putWishlist = function (req, res) {
-  var wishlist = _.find(wishlists, {id: +req.params.wishlistId});
-  console.log(Object.keys(req.body));
-  wishlist.productIds = req.body.productIds;
+  var wishlist = _.find(wishlists, {id: +req.params.id});
+  wishlist.products = req.body.products;
   res.send({wishlist: wishlist});
 };

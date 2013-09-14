@@ -23,6 +23,13 @@ app.use(function (req, res, next) {
   }
 });
 
+// Free love
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
+
 // Appease the crawler
 app.use('/', function (req, res, next) {
   var route = req.query['_escaped_fragment_'];
@@ -123,9 +130,9 @@ app.get('/rest/posts/:postTitle', function (req, res) {
 var demoApiHandlers = require('./lib/demo_api');
 app.get('/demo/customers/:handle', demoApiHandlers.getCustomer);
 app.get('/demo/products', demoApiHandlers.getProducts);
-app.get('/demo/products/:productId', demoApiHandlers.getProduct);
-app.get('/demo/wishlists/:wishlistId', demoApiHandlers.getWishlist);
-app.put('/demo/wishlists/:wishlistId', demoApiHandlers.putWishlist);
+app.get('/demo/products/:id', demoApiHandlers.getProduct);
+app.get('/demo/wishlists/:id', demoApiHandlers.getWishlist);
+app.put('/demo/wishlists/:id', demoApiHandlers.putWishlist);
 
 var port = process.env.PORT || 3000
 app.listen(port);
