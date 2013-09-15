@@ -26,6 +26,7 @@ app.use(function (req, res, next) {
 // Free love
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, PUT, OPTIONS");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   next();
 });
@@ -133,6 +134,7 @@ app.get('/demo/products', demoApiHandlers.getProducts);
 app.get('/demo/products/:id', demoApiHandlers.getProduct);
 app.get('/demo/wishlists/:id', demoApiHandlers.getWishlist);
 app.put('/demo/wishlists/:id', demoApiHandlers.putWishlist);
+app.options('*', demoApiHandlers.options);
 
 var port = process.env.PORT || 3000
 app.listen(port);
