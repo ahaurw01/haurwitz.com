@@ -126,7 +126,7 @@ App.NotificationContainerView = Ember.CollectionView.extend({
    * There will be an App.NotificationView rendered for each
    * guy in here.
    */
-  contentBinding: Ember.Binding.oneWay('controller.notifications')
+  content: Ember.computed.oneWay('controller.notifications')
 });
 ```
 
