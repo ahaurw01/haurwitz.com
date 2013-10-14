@@ -7,7 +7,7 @@
    * @param {object} hash - hash of concrete and computed properties
    */
   var ComputeModel = function (hash) {
-    this.backburner = new Backburner(['recompute', 'afterRecompute']);
+    this.backburner = new Backburner(['recompute', 'notify']);
     this._values = {}; // Hash of stored property values
     var key, value;
     // Set up the computed properties in a call to run() so that we know
@@ -132,7 +132,7 @@
       if (this._changedProperties.indexOf(key) === -1) {
         this._changedProperties.push(key);
       }
-      this.backburner.deferOnce('afterRecompute', this, 'notify');
+      this.backburner.deferOnce('notify', this, 'notify');
     },
 
     /**
