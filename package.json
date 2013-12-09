@@ -23,5 +23,7 @@
   "scripts": {
     "start": "./node_modules/.bin/brunch build && node server/app"
   },
-  "engine": "node >= 0.8.0"
+  "engines": {
+    "node": "0.8.19"
+  }
 }
