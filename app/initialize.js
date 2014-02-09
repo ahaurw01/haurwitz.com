@@ -1,5 +1,13 @@
 'use strict';
 
+// mock GA if need be.
+if (window.location.toString().split('#')[0].indexOf('localhost') > -1) {
+  window.ga = function () {
+    var params = Array.prototype.slice.call(arguments);
+    console.log('ga: ' + params.join(', ') + ')');
+  };
+}
+
 var App = require('app');
 
 /**
