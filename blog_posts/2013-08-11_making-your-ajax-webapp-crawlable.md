@@ -18,12 +18,12 @@ Google requires you to have not just a hash (`#`) be the delimiter right before 
 ```
 Ember.Location.registerImplementation('hashbang', Ember.HashLocation.extend({
   getURL: function () {
-    return get(this, 'location').hash.substr(2);
+    return Ember.get(this, 'location').hash.substr(2);
   },
 
   setURL: function (path) {
-    get(this, 'location').hash = '!' + path;
-    set(this, 'lastSetURL', '!' + path);
+    Ember.get(this, 'location').hash = '!' + path;
+    Ember.set(this, 'lastSetURL', '!' + path);
   },
 
   onUpdateURL: function (callback) {
@@ -33,8 +33,8 @@ Ember.Location.registerImplementation('hashbang', Ember.HashLocation.extend({
     Ember.$(window).bind('hashchange.ember-location-' + guid, function () {
       Ember.run(function() {
         var path = location.hash.substr(2);
-        if (get(self, 'lastSetURL') === path) { return; }
-        set(self, 'lastSetURL', null);
+        if (Ember.get(self, 'lastSetURL') === path) { return; }
+        Ember.set(self, 'lastSetURL', null);
         callback(path);
       });
     });
@@ -62,7 +62,7 @@ You should be able to shuttle around your app like always, except now the tic-ta
 
 You'd find that if you make a request to `http://example.com/#!/categories/bieber-nip-slips`, the server will not receive any information after the `#` character. This is by specification. Google is smart and knows this, so it has a solution. Google reads any url that has a `#!` in it and treats whatever follows as a query parameter. The crawler would make a request instead to `http://example.com?_escaped_fragment_=/categories/bieber-nip-slips`. I'm not kidding - the exact string `_escaped_fragment_`.
 
-In this way, they pass their cleverness on to your server so that your server can see that somebody is crawling your site who won't be able to make the ajax magic happen, but they still really want to see those provocative Bieber pics. It is now up to your server to return some sort of html snapshot of the page that you would normally see if you were a real person with a real browser. 
+In this way, they pass their cleverness on to your server so that your server can see that somebody is crawling your site who won't be able to make the ajax magic happen, but they still really want to see those provocative Bieber pics. It is now up to your server to return some sort of html snapshot of the page that you would normally see if you were a real person with a real browser.
 
 ### How I appease the Google gods
 
