@@ -1,6 +1,6 @@
 {{{
   "title": "We're building too much",
-  "date": "Dec 8, 2013"
+  "date": "Feb 9, 2014"
 }}}
 
 We've all been there. You've got a great idea for a new side project. A couple friends are getting together to start a new venture. Management and Product have come up with The Answer The Market Is Looking For™. I'm talking about the beginning of a new product/feature/thing. If there's anything in common with all new undertakings, it's the desire to build too much at the beginning. This is a problem I see affecting the entire software industry - from pet projects to multi-billion dollar ventures - and all aspects of development - from how we construct the most low-level solutions for requirements to how high-level requirements are constructed.<!--more-->
@@ -25,7 +25,7 @@ The idea I'm getting at here is that this kind of focus is essential to a fledgl
 
 ### Impossible to see the future is
 
-As soon as a new project is underway, minds race. "What's going to happen when we start getting all those millions of widget orders in every day instead of just a handful?" "What am I going to do when there are more search results than can be comfortably viewed within one page?" "But what if somebody wants to access my website on a Palm VII using a dial-up connection from the International Space Station?" This is good. For known future needs, it is nice to have certain concerns in mind when architecting a new product.
+As soon as a new project is underway, minds race. "What's going to happen when we start getting all those millions of widget orders every day instead of just a handful?" "What am I going to do when there are more search results than can be comfortably viewed within one page?" "But what if somebody wants to access my website on a Palm VII using a dial-up connection from the International Space Station?" This is good. For known future needs, it is nice to have certain concerns in mind when architecting a new product.
 
 > Why waste time solving problems now that you may never have in the future?
 
