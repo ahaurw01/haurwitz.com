@@ -24,6 +24,6 @@
     "start": "./node_modules/.bin/brunch build && node server/app"
   },
   "engines": {
-    "node": "0.8.19"
+    "node": "~0.10"
   }
 }
