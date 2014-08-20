@@ -23,7 +23,7 @@ Why does the reversed scenario sound so good? Most importantly, you're able to g
 
 The idea I'm getting at here is that this kind of focus is essential to a fledgling project. Describe exactly what problems you want to solve first so you can know exactly what value you're trying to offer. At the beginning of a project, all those involved should be keenly aware of why they're building the product. Even if the project is as small as a blog for poor web development-related jokes, what you're doing is novel, right? Otherwise you wouldn't be doing it. Finding out exactly what is novel and important about your project is where your focus should be.
 
-### Impossible to see the future is
+### Impossible to see, the future is
 
 As soon as a new project is underway, minds race. "What's going to happen when we start getting all those millions of widget orders every day instead of just a handful?" "What am I going to do when there are more search results than can be comfortably viewed within one page?" "But what if somebody wants to access my website on a Palm VII using a dial-up connection from the International Space Station?" This is good. For known future needs, it is nice to have certain concerns in mind when architecting a new product.
 
