@@ -1,6 +1,13 @@
+BACKGROUND-COLOR=#363A42
+MAIN-TITLE-COLOR=#FFD966
+TITLE-COLOR=#6DD0F2
+ACCENT-COLOR=#F59ABE
+ACCENT-COLOR-2=#EFF4F7
+TEXT-COLOR=#DDDDDD
+
 body
-  background-image url('../img/wild_oliva.png')
-  color #DDD
+  background-color BACKGROUND-COLOR
+  color TEXT-COLOR
   font-family "Monda", "Helvetica Neue", Helvetica, Arial, sans-serif
 
 h1, h2, h3, h4, h5, h6
@@ -10,15 +17,18 @@ h1
   font-size 36px
 
 a
-  color #CE66E3
+  color TITLE-COLOR
+
+a.social
+  color ACCENT-COLOR
 
 a:hover
   text-decoration none
-  color #D1008C
+  color ACCENT-COLOR-2
 
 .go-home a
   text-decoration none
-  color #23D100
+  color MAIN-TITLE-COLOR
 
 blockquote:before
   content "\f10d"
@@ -38,3 +48,6 @@ blockquote
   padding-left 60px
   margin-left 30px
   font-style italic
+
+code
+  color darken(TITLE-COLOR, 50%)
