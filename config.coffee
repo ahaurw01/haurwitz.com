@@ -69,3 +69,4 @@ exports.config =
         Showdown: false
         moment: false
         DISQUS: false
+        hljs: false

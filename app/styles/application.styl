@@ -1,3 +1,5 @@
+@import 'nib'
+
 BACKGROUND-COLOR=#363A42
 MAIN-TITLE-COLOR=#FFD966
 TITLE-COLOR=#6DD0F2
@@ -49,5 +51,12 @@ blockquote
   margin-left 30px
   font-style italic
 
-code
+:not(pre) > code
   color darken(TITLE-COLOR, 50%)
+
+pre
+  border-radius 4px
+  background-color #282b2e // obsidian highlight.js theme color
+
+#warning
+  color ACCENT-COLOR

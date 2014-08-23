@@ -1,6 +1,6 @@
 {{#view App.BlogWrapperView}}
   {{#link-to 'post' this}} <h2 class="post-title">{{title}}</h2> {{/link-to}}
   <span class="post-date">{{date date}}</span>
-  <div class="post-full">{{markdown body}}</div>
+  <div class="post-full">{{mark-down content=body}}</div>
   {{view App.DisqusView postBinding="controller.content"}}
 {{/view}}

@@ -32,5 +32,6 @@ registerTemplates();
 require('models');
 require('controllers');
 require('views');
+require('components');
 require('routes');
 require('utils/handlebars_helpers');
