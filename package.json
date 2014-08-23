@@ -16,12 +16,14 @@
     "clean-css-brunch": ">= 1.0 < 1.8",
     "jshint-brunch": ">= 1.6 < 1.8",
     "ember-handlebars-brunch": "git://github.com/fuseelements/ember-handlebars-brunch#fix/ember-1.0.0",
-    "brunch": "1.7"
+    "brunch": "1.7",
+    "gaze": "0.6.4"
   },
   "devDependencies": {
   },
   "scripts": {
-    "start": "rm -rf public && ./node_modules/.bin/brunch build && node server/app"
+    "start": "rm -rf public && ./node_modules/.bin/brunch build && node server/app",
+    "watch": "rm -rf public && node util/watch"
   },
   "engines": {
     "node": "~0.10"
