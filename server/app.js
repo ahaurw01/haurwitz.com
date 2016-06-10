@@ -1,5 +1,6 @@
 var express = require('express'),
     app = express(),
+    bodyParser = require('body-parser'),
     _ = require('lodash'),
     rsvp = require('rsvp'),
     path = require('path'),
@@ -16,7 +17,7 @@ function findPostByTitle(title) {
 
 // Please don't go through heroku!
 app.use(function (req, res, next) {
-  if (req.host.indexOf('heroku') > -1) {
+  if (req.hostname.indexOf('heroku') > -1) {
     res.redirect(301, 'http://aaron.haurwitz.com' + req.url);
   } else {
     next();
@@ -52,8 +53,7 @@ app.use('/', function (req, res, next) {
 app.use(express.static(path.normalize(__dirname + '/../public/')));
 
 // body parser for demo purposes
-app.use(express.bodyParser());
-app.use(express.methodOverride());
+app.use(bodyParser.json());
 
 // Look through the blog_posts directory and put the posts into memory
 fs.readdir(path.normalize(__dirname + '/../blog_posts/'), function (err, files) {
