@@ -136,6 +136,14 @@ app.get('/demo/wishlists/:id', demoApiHandlers.getWishlist);
 app.put('/demo/wishlists/:id', demoApiHandlers.putWishlist);
 app.options('*', demoApiHandlers.options);
 
+// Server-rendered pages.
+app.set('view engine', 'pug');
+app.set('views', __dirname + '/views');
+
+app.get('/about', function (req, res) {
+  res.render('about');
+});
+
 var port = process.env.PORT || 3000
 app.listen(port);
 console.log('Server started on port ' + port);
