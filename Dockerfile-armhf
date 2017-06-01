@@ -1,5 +1,7 @@
 FROM hypriot/rpi-node:6.10.0-alpine
 
+RUN apk --update add git
+
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 COPY package.json /usr/src/app/
