@@ -5,7 +5,7 @@
   "author": "Aaron Haurwitz <aaron.haurwitz@gmail.com>",
   "dependencies": {
     "body-parser": "1.15.1",
-    "brunch": "1.7",
+    "brunch": "^2.10.9",
     "clean-css-brunch": ">= 1.0 < 1.8",
     "coffee-script-brunch": ">= 1.0 < 1.8",
     "css-brunch": ">= 1.0 < 1.8",
@@ -17,7 +17,7 @@
     "pug": "2.0.0-beta3",
     "rsvp": "2.0.x",
     "showdown": "0.3.x",
-    "stylus-brunch": "git://github.com/fuseelements/stylus-brunch#stylus-update",
+    "stylus-brunch": "^2.10.0",
     "uglify-js-brunch": ">= 1.0 < 1.8"
   },
   "devDependencies": {},
