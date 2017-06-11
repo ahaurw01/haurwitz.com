@@ -20,8 +20,11 @@
     "stylus-brunch": "^2.10.0",
     "uglify-js-brunch": ">= 1.0 < 1.8"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  },
   "scripts": {
-    "start": "rm -rf public && ./node_modules/.bin/brunch build && node server/app"
+    "start": "rm -rf public && ./node_modules/.bin/brunch build && node server/app",
+    "watch": "./node_modules/.bin/nodemon -x 'npm start' -w blog_posts/ -e md"
   }
 }
