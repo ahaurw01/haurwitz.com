@@ -5,7 +5,7 @@
   "author": "Aaron Haurwitz <aaron.haurwitz@gmail.com>",
   "dependencies": {
     "body-parser": "1.15.1",
-    "brunch": "^2.10.9",
+    "brunch": "2.10.9",
     "clean-css-brunch": ">= 1.0 < 1.8",
     "coffee-script-brunch": ">= 1.0 < 1.8",
     "css-brunch": ">= 1.0 < 1.8",
