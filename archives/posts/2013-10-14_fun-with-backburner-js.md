@@ -1,7 +1,6 @@
-{{{
-  "title": "Fun with Backburner.js",
-  "date": "Oct 14, 2013"
-}}}
+# Fun with Backburner.js
+
+_Oct 14, 2013_
 
 [ebryn/backburner.js](https://github.com/ebryn/backburner.js) is a queueing library that happens to be the heart and soul of the Ember.js internal workflow. Over in the Ember world, this workflow is referred to as the RunLoop. I have put together a fun little example of Backburner to demystify some of its inner workings and to shed light on how other frameworks put it to use.
 
@@ -10,7 +9,7 @@ But before that, let's take a look at what Backburner has to offer.<!--more-->
 ### Need I remind you, 007, that you have a license to kill, not to break the traffic laws. --Q
 
 ```
-backburner = new Backburner(['morningActivities', 
+backburner = new Backburner(['morningActivities',
     'midDayActivities', 'eveningActivities']);
 ```
 
@@ -46,11 +45,11 @@ This says, "Mom, relax. I'll do it before the morning is over. You've told me li
 
 ### When do I use `Backburner#run`?
 
-You might wonder what happens when you make a call to `Backburner#defer` if you don't do it inside of a call to `Backburner#run`. 
+You might wonder what happens when you make a call to `Backburner#defer` if you don't do it inside of a call to `Backburner#run`.
 
 If you happen to call `defer` during the execution of the queue-draining algorithm, Backburner merges your request with the current instance of the algorithm execution. If you defer an action to the `morningActivities` queue while the `eveningActivities` queue is currently being flushed, then Backburner will circle back and drain the `morningActivities` and `midDayActivities` queues before eventually finishing the `eveningActivities` queue.
 
-If you instead happen to call `defer` outside of an active draining of the queues, Backburner will automatically kick off the algorithm by way of a `setTimeout(..., 0)`. This is useful to know if you expect deferred actions to be executed immediately before your code continues. 
+If you instead happen to call `defer` outside of an active draining of the queues, Backburner will automatically kick off the algorithm by way of a `setTimeout(..., 0)`. This is useful to know if you expect deferred actions to be executed immediately before your code continues.
 
 If you are invoking a function that has deferred side effects and want those side effects to be resolved immediately after you invoke that function, you must wrap the invocation in a call to `Backburner#run`.
 
@@ -58,7 +57,7 @@ If you are invoking a function that has deferred side effects and want those sid
 
 Backburner's API includes more than `run`, `defer`, and `deferOnce`, although in my estimation, those are the core entry points.
 
-The rest of the API includes `Backburner#setTimeout`, `Backburner#debounce`, `Backburner#throttle`, and `Backburner#cancel`. These gems act basically as one might expect, but you get the added benefit of working within the confines of the queue-flushing algorithm. 
+The rest of the API includes `Backburner#setTimeout`, `Backburner#debounce`, `Backburner#throttle`, and `Backburner#cancel`. These gems act basically as one might expect, but you get the added benefit of working within the confines of the queue-flushing algorithm.
 
 So say, for example, you make a couple calls to `Backburner#setTimeout` that happen to occur around the same time. They will likely occur within the same queue-flushing run and offer you the action prioritization and optimizations you have come to know and love about Backburner.
 
@@ -75,7 +74,7 @@ var kitty = new ComputeModel({
   sassLevel: 'quiteSassy',
 
   isFatAndSassy: function (weight, sassLevel) {
-    return weight > 14 && 
+    return weight > 14 &&
         ['quiteSassy', 'ludicrouslySassy'].indexOf(sassLevel) >= 0;
   }.computed('weight', 'sassLevel'),
 
@@ -97,15 +96,15 @@ kitty.get('description');
 
 ### Overview
 
-- Each `ComputeModel` instance will contain its own Backburner instance. This Backburner is responsible for scheduling recalculations of computed properties and batching change notifications for external listeners.
+* Each `ComputeModel` instance will contain its own Backburner instance. This Backburner is responsible for scheduling recalculations of computed properties and batching change notifications for external listeners.
 
-- This Backburner will consist of two queues - `recompute` and `notify`.
+* This Backburner will consist of two queues - `recompute` and `notify`.
 
-- `ComputeModel`s have a `set` method that triggers the scheduling of recomputation for all affected computed properties. It also schedules the eventual notification of interested external listeners.
+* `ComputeModel`s have a `set` method that triggers the scheduling of recomputation for all affected computed properties. It also schedules the eventual notification of interested external listeners.
 
-- Recomputing a computed property means executing the function associated with it, storing the resulting value, and then scheduling recomputation of other computed properties that may depend on this computed property.
+* Recomputing a computed property means executing the function associated with it, storing the resulting value, and then scheduling recomputation of other computed properties that may depend on this computed property.
 
-- After all necessary recomputations have occurred, external listeners will be notified of all properties that just changed.
+* After all necessary recomputations have occurred, external listeners will be notified of all properties that just changed.
 
 ### `scheduleRecompute`
 

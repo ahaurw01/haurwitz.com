@@ -1,7 +1,6 @@
-{{{
-  "title": "UX analytics with Ember.js",
-  "date": "Aug 23, 2014"
-}}}
+# UX analytics with Ember.js
+
+_Aug 23, 2014_
 
 You need more information about how your users are interacting with your webapp. There are many reasons for this. Chief among them is smugly rubbing your usability predictions in the face of your senior designer. What follows is an easy way to incorporate Google Analytics into your webapp to track usability.<!--more--> I developed a version of this approach during a [Resonate Hackathon](http://blog.resonateinsights.com/a-hackathon-play-by-play/).
 
@@ -42,7 +41,7 @@ public void doSomethingSuperSecret() {
 }
 ```
 
-Let's bring this declarative style of infrastructure logic over to the JavaScript world and tell our application *what* we want to happen when a user interacts with an element on the page, not exactly *how* to do it.
+Let's bring this declarative style of infrastructure logic over to the JavaScript world and tell our application _what_ we want to happen when a user interacts with an element on the page, not exactly _how_ to do it.
 
 ### Using Google Analytics
 

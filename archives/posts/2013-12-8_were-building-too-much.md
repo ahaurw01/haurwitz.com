@@ -1,7 +1,6 @@
-{{{
-  "title": "We're building too much",
-  "date": "Feb 9, 2014"
-}}}
+# We're building too much
+
+_Feb 9, 2014_
 
 We've all been there. You've got a great idea for a new side project. A couple friends are getting together to start a new venture. Management and Product have come up with The Answer The Market Is Looking For™. I'm talking about the beginning of a new product/feature/thing. If there's anything in common with all new undertakings, it's the desire to build too much at the beginning. This is a problem I see affecting the entire software industry - from pet projects to multi-billion dollar ventures - and all aspects of development - from how we construct the most low-level solutions for requirements to how high-level requirements are constructed.<!--more-->
 

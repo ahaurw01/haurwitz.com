@@ -1,7 +1,6 @@
-{{{
-  "title": "Growl-like notifications with Ember.js",
-  "date": "Sep 02, 2013"
-}}}
+# Growl-like notifications with Ember.js
+
+_Sep 02, 2013_
 
 Do you have things to say? Do you have a message for the world? Are you seeking a vessel to express this divine inspiration? Do you feel like blurting out this message at the top right corner of the screen in a fancy way? Then you may need to consider growl-like notifications in your webapp.<!--more-->
 
@@ -11,11 +10,11 @@ Before we go any further, I know you greedy webdev types. You're thinking, "demo
 
 ### The approach
 
-At a high level, this is the approach we will take. This is done within the context of an Ember.js webapp, but you could take these ideas and run with them in your framework of choice. 
+At a high level, this is the approach we will take. This is done within the context of an Ember.js webapp, but you could take these ideas and run with them in your framework of choice.
 
 #### Collection of notification objects
 
-A controller will be responsible for getting told about new notifications and storing them within a collection. 
+A controller will be responsible for getting told about new notifications and storing them within a collection.
 
 #### View to house the current notifications
 
@@ -35,7 +34,7 @@ App.ApplicationController = Ember.Controller.extend({
    * @property {Array} The array of app-wide notifications
    */
   notifications: Em.A(),
-  
+
   /**
    * @observer Not technically necessary, but cleans up
    * the notifications array when all have been closed
@@ -86,7 +85,7 @@ App.SomeRoute = Ember.Route.extend({
     workPromise.then(
         function (value) {
           this.controllerFor('application').pushNotification('success', 'You did it!', 'The thing was completed. Hooray!');
-        }, 
+        },
         function (error) {
           this.controllerFor('application').pushNotification('failure', 'Nooo', 'Cue the sad trombone...');
         });
@@ -98,7 +97,7 @@ You may have noticed there is a `closed` property on the notification object. Th
 
 ### The views
 
-The container for your notifications will need to be a fixed-position, high-z-index view that sits empty until populated with notifications. I put this container inside of the application template for demo purposes. It is an extension of the `Ember.CollectionView` class. The `CollectionView` will spit out a child view for every item in its `content` property. *Hat tip to Asaf for suggesting this instead of the `{{#each}}` helper.*
+The container for your notifications will need to be a fixed-position, high-z-index view that sits empty until populated with notifications. I put this container inside of the application template for demo purposes. It is an extension of the `Ember.CollectionView` class. The `CollectionView` will spit out a child view for every item in its `content` property. _Hat tip to Asaf for suggesting this instead of the `{{#each}}` helper._
 
 ```
 <script type="text/x-handlebars" data-template-name="application">
@@ -114,13 +113,13 @@ App.NotificationContainerView = Ember.CollectionView.extend({
    * @property {String[]} The array of concrete class names to put on this view's element
    */
   classNames: ['notification-container'],
-  
+
   /**
    * @property {View} Our notification view class.
    * This determines what view class to render for each item in the content array
    */
   itemViewClass: App.NotificationView,
-  
+
   /**
    * Binding to our controller's notifications array.
    * There will be an App.NotificationView rendered for each
@@ -156,15 +155,15 @@ Here are all the properties of the `NotificationView`. We'll regroup after all t
 ```
 App.NotificationView = Ember.View.extend({
   templateName: 'notification',
-  
+
   classNameBindings: [
     ':notification',
     'content.closed',
     'isOpaque'
   ],
-  
+
   attributeBindings: ['style'],
-  
+
   /**
    * @property {Number} Will be set by `didInsertElement`.
    * Used for clearing the auto-hide timeout
@@ -217,7 +216,7 @@ App.NotificationView = Ember.View.extend({
    * many milliseconds
    */
   hideAfterMs: 10000,
-  
+
   /**
    * @property {String} The extra styling necessary for placement
    * within the notification container
@@ -273,7 +272,7 @@ App.NotificationView = Ember.View.extend({
 });
 ```
 
-...And that's it! Ok, I'll explain some of this nonsense. 
+...And that's it! Ok, I'll explain some of this nonsense.
 
 #### Animation
 
@@ -293,7 +292,7 @@ When the view catches the `close` event, it sets `isOpaque` to false, letting th
 
 Whenever a notification is closed, we want all other notifications that were present to stay on the screen, but animate to their new location. To achieve this, we must make sure that the collection of notifications being wrapped by our `NotificationContainerView` does not change in a significant way. If this collection is rebuilt, every notification view that was in the DOM is ripped out and new ones are put in. We don't want that because the new ones would not know where they were previously and animation would be near impossible.
 
-Instead what we do is set a `closed` property on any notification that has been closed and just don't display it on the screen anymore. We can simply update the position settings of the views that need to stay visible and they will animate nicely to their new homes. 
+Instead what we do is set a `closed` property on any notification that has been closed and just don't display it on the screen anymore. We can simply update the position settings of the views that need to stay visible and they will animate nicely to their new homes.
 
 In the `close` event handler, we wait 300 milliseconds to set the `closed` property to true since we have a classname binding on the `content.closed` property that sets `display: none`.
 
@@ -372,4 +371,4 @@ Most important is the `transition` stuff going on in the `.notification` class a
 }
 ```
 
-[Play with the demo](/#!/demos/notifications) and leave feedback. I'm curious how other folks are handling notifications. 
+[Play with the demo](/#!/demos/notifications) and leave feedback. I'm curious how other folks are handling notifications.

@@ -1,7 +1,6 @@
-{{{
-  "title": "Making your ajax webapp crawlable",
-  "date": "Aug 11, 2013"
-}}}
+# Making your ajax webapp crawlable
+
+_Aug 11, 2013_
 
 As awesome as Google's crawlbot is, it doesn't view your website like a real human does. If your page requires ajax requests to fire and javascript code to populate the DOM in order to view anything useful, Google won't see that. Here's how I've solved this problem for this blog. <!--more-->
 
