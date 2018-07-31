@@ -8,6 +8,6 @@
     "live-server": "^1.2.0"
   },
   "scripts": {
-    "start": "live-server --port=11111"
+    "start": "live-server --port=11111 public"
   }
 }
