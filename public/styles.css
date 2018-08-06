@@ -42,7 +42,9 @@ a {
 @media (min-width: 768px) {
   .title-hero .contact-menu {
     justify-content: flex-end;
-    padding-right: 25px;
+  }
+  .title-hero .contact-menu li:last-of-type {
+    margin-right: 40px;
   }
 }
 .title-hero .contact-menu a {
