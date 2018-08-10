@@ -5,13 +5,15 @@
   "author": "Aaron Haurwitz <aaron.haurwitz@gmail.com>",
   "dependencies": {},
   "devDependencies": {
+    "jstransformer-stylus": "^1.5.0",
+    "jstransformer-uglify-js": "^1.2.0",
     "live-server": "^1.2.0",
     "pug-cli": "^1.0.0-alpha6",
     "stylus": "^0.54.5"
   },
   "scripts": {
     "watch": "nodemon --watch src --ext '*' --exec 'npm run build'",
-    "build": "pug src --out public && stylus src --out public",
+    "build": "pug src --out public",
     "start": "live-server --port=11111 public"
   }
 }
