@@ -15,6 +15,7 @@
   "scripts": {
     "watch": "nodemon --watch src --ext '*' --exec 'npm run build'",
     "build": "pug src --out public",
-    "start": "live-server --port=11111 public"
+    "start": "live-server --port=11111 public",
+    "deploy": "npm run build && firebase deploy"
   }
 }
