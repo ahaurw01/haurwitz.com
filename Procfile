@@ -1,1 +1,0 @@
-web: ./node_modules/.bin/brunch build && rm public/develop.html && node server/app
