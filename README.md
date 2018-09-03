@@ -6,5 +6,6 @@ My personal site.
 
 ```sh
 $ npm install
+$ npm run watch
 $ npm start
 ```
