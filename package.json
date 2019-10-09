@@ -5,7 +5,7 @@
   "author": "Aaron Haurwitz <aaron.haurwitz@gmail.com>",
   "dependencies": {},
   "devDependencies": {
-    "firebase-tools": "4.2.1",
+    "firebase-tools": "7.5.0",
     "jstransformer-stylus": "^1.5.0",
     "jstransformer-uglify-js": "^1.2.0",
     "live-server": "^1.2.1",
