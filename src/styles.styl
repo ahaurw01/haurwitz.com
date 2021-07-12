@@ -20,6 +20,7 @@ a
   flex-direction column
   background-color #F2F2F2
   padding 0 0 50px
+  overflow hidden
 
   h1
     margin 20px 0 0
@@ -35,6 +36,7 @@ a
     display flex
     width 100%
     justify-content center
+    position relative
 
     @media (min-width: 768px)
       justify-content flex-end
@@ -43,6 +45,164 @@ a
 
     a
       margin 3px 12px
+
+  .peeper
+    position absolute
+    top 100px
+    display none
+
+    @media (min-width: 768px)
+      display block
+
+    .paws
+      position absolute
+      top 80px
+      right 0
+      transform translateX(80% + 20px)
+      animation-name grab-on
+      animation-duration 22s
+      animation-delay 30s
+      animation-iteration-count infinite
+      animation-timing-function ease
+
+      .paw
+        &, &::before, &::after
+          border-radius 50%
+          background #333
+          width 40px
+          height 13px
+          content ' '
+          position relative
+          display block
+        &::before
+          position absolute
+          top -8px
+        &::after
+          position absolute
+          top 8px
+        &.bottom
+          margin-top 20px
+
+    .body
+      transform translateX(120px)
+      animation-name hello
+      animation-duration 22s
+      animation-delay 30s
+      animation-iteration-count infinite
+      animation-timing-function ease
+
+    .neck
+      width 0
+      height 0
+      border-style solid
+      border-width 50px 200px 50px 0
+      border-color transparent #666 transparent transparent
+      position absolute
+      top 21px
+      left 33px
+
+    .head
+      border-radius 50%
+      background #333
+      width 100px
+      height 80px
+      position relative
+
+      .ear
+        width 0
+        height 0
+        border-style solid
+        border-width 0 16px 27px
+        border-color transparent transparent #333 transparent
+        position absolute
+        top -13px
+
+        &::before
+          content ' '
+          border-left 2px solid white
+          height 10px
+          display block
+          position absolute
+
+        &.left
+          left 1px
+          transform rotate(-22deg)
+          &::before
+            transform rotate(-19deg)
+            top 11px
+            left 2px
+
+        &.right
+          right 3px
+          transform rotate(18deg)
+          &::before
+            transform rotate(-33deg)
+            top 11px
+            left 3px
+
+      .nose
+        width 0
+        height 0
+        border-style solid
+        border-width 9px 7px 0 7px
+        border-color pink transparent transparent transparent
+        position absolute
+        top calc(50% + 12px)
+        left 50%
+        transform translate(-50%, -50%)
+
+      .whiskers
+        position absolute
+        top 48px
+        &, &::before, &::after
+          content ' '
+          display block
+          transform-origin top right
+          width 30px
+          height 1px
+          background white
+        &::before
+          transform rotate(15deg) translateY(-2px)
+        &::after
+          transform rotate(-15deg) translateY(2px)
+
+        &.left
+          left 0px
+        &.right
+          right 30px
+          transform rotate(180deg) translateY(-2px)
+
+      .eye
+        position absolute
+        top 20px
+        border-radius 50%
+        width 18px
+        height 18px
+        background #dff9df
+        overflow hidden
+
+
+        &::before
+          border-radius 50%
+          content ' '
+          display block
+          background black
+          width 8px
+          height 11px
+          position absolute
+          top calc(50% + 2px)
+          left 50%
+          transform translate(-50%, -50%)
+          animation-name eye-roll
+          animation-duration 22s
+          animation-delay 30s
+          animation-iteration-count infinite
+          animation-timing-function ease
+
+        &.left
+          left 26px
+        &.right
+          right 26px
 
 .avatar
   border-radius 50%
@@ -72,6 +232,51 @@ a
   .card-text
     padding 0 25px
 
-.protenus
-  box-sizing: border-box;
-  padding: 28px 28px 14px;
+@keyframes grab-on {
+  0% {
+    transform translateX(80% + 20px)
+  }
+  5% {
+    transform translateX(80%)
+  }
+  22% {
+    transform translateX(80%)
+  }
+  23% {
+    transform translateX(80% + 20px)
+  }
+}
+
+@keyframes hello {
+  3% {
+    transform translateX(120px)
+  }
+  10% {
+    transform translateX(0)
+  }
+  17% {
+    transform translateX(0)
+  }
+  22% {
+    transform translateX(120px)
+  }
+}
+
+@keyframes eye-roll {
+  8% {
+    top calc(50% + 2px)
+    left 50%
+  }
+  13% {
+    top 3px
+    left 6px
+  }
+  15% {
+    top 3px
+    left 6px
+  }
+  21% {
+    top calc(50% + 2px)
+    left 14px
+  }
+}
